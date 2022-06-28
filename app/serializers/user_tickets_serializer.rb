@@ -1,4 +1,4 @@
 class UserTicketsSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email
+  attributes :id, :username, :email
   has_many :tickets
 end

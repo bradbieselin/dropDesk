@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
-const Ticket = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+const Ticket = ({ ticket }) => {
+  return <div>{ticket.title}</div>;
 };
 
 export default Ticket;

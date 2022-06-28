@@ -3,8 +3,13 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
     def index
-        tickets = Ticket.all
-        render json: tickets, include: :user, status: 200
+        if params[:user_id]
+            user = User.find(params[:user_id])
+            render json: user.tickets, status: 200
+        else
+            tickets = Ticket.all
+            render json: tickets, include: :user, status: 200
+        end
     end
 
     def show

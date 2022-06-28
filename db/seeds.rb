@@ -19,9 +19,9 @@ puts "Finished seeding categories!"
 
 puts "Seeding users..."
 
-brad = User.create(name: "brad", email: "brad@bradbieselin.com");
-sarah = User.create(name: "sarah", email: "sheldrickse@gmail.com");
-tom = User.create(name: "tom", email: "tom@gmail.com");
+brad = User.create(username: "brad", email: "brad@bradbieselin.com", password: "test");
+sarah = User.create(username: "sarah", email: "sheldrickse@gmail.com", password: "test");
+tom = User.create(username: "tom", email: "tom@gmail.com", password: "test");
 
 puts "Finished seeding users!"
 
@@ -29,5 +29,6 @@ puts "Finished seeding users!"
 puts "Seeding tickets..."
 
 Ticket.create(title: "Monday meeting", user_id: brad.id, category_id: meetings.id);
+Ticket.create(title: "Tuesday meeting", user_id: brad.id, category_id: meetings.id);
 
 puts "Finished seeding tickets!"

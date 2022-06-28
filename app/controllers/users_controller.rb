@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
-    rescue_from ActiveRecord::RecordInvalid, with: :invalid
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+
+    skip_before_action :authorize, only: :create
+
 
     def index
         users = User.all
@@ -8,23 +10,19 @@ class UsersController < ApplicationController
     end
 
     def show
-        user = User.find_by(id: params[:id])
-        render json: user, serializer: UserTicketsSerializer, status: :ok
+        render json: @current_user
     end
 
     def create
         user = User.create!(user_params)
+        session[:user_id] = user.id
         render json: user, status: :created
     end
 
     private
 
     def user_params
-        params.permit(:name, :email)
-    end
-
-    def invalid
-        render json: { error: 'User missing information' }, status: 422
+        params.permit(:username, :email, :password)
     end
 
     def render_not_found_response 
