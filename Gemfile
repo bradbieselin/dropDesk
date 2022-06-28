@@ -51,3 +51,6 @@ gem 'active_model_serializers',
     '~> 0.10.12',
     git: 'https://github.com/jpawlyn/active_model_serializers.git',
     branch: '0-10-stable'
+
+
+gem 'email_validator'

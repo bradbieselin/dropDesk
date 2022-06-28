@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+meetings = Category.create(title: "Meetings");
+
+brad = User.create(name: "brad", email: "brad@bradbieselin.com");
+
+Ticket.create(title: "Monday meeting", user_id: brad.id, category_id: meetings.id);

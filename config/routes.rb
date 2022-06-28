@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-   get '/hello', to: 'application#hello_world'
- 
-   get '*path',
-       to: 'fallback#index',
-       constraints: ->(req) { !req.xhr? && req.format.html? }
+  resources :categories, only: [:index, :show]
+  resources :tickets, only: [:index, :show, :create]
+  resources :users, only: [:index, :show, :create]
  end
