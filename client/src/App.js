@@ -10,6 +10,8 @@ function App() {
           <Route path="/">
             <LandingPage />
           </Route>
+          <Route path="/users">
+          </Route>
         </Switch>
     </BrowserRouter>
   );

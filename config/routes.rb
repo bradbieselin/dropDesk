@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   resources :categories, only: [:index, :show]
-  resources :tickets, only: [:index, :show, :create]
+  resources :tickets
   resources :users, only: [:index, :show, :create]
  end
