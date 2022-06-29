@@ -1,31 +1,26 @@
 import React, { useState, useEffect } from "react";
-import Ticket from "./Ticket";
+import Categories from "./Categories";
 import styled from "styled-components";
+import { DragDropContext } from "react-beautiful-dnd";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
 
 const TicketPage = ({ user }) => {
-  const [tickets, setTickets] = useState([]);
+  const onDragEnd = () => {};
 
-  useEffect(() => {
-    fetch("/tickets")
-      .then((r) => r.json())
-      .then(setTickets);
-  }, []);
-
-  const Container = styled.div`
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: auto;
-    width: 100%;
-    height: 100%;
-  `;
-
-  const ticketCards = tickets.map((ticket) => {
-    return <Ticket key={ticket.id} ticket={ticket} />;
-  });
   return (
-    <div>
-      <Container>{ticketCards}</Container>
-    </div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Container>
+        <div className="bg"></div>
+        <div className="bg bg2"></div>
+        <div className="bg bg3"></div>
+        <Categories user={user} />
+      </Container>
+    </DragDropContext>
   );
 };
 

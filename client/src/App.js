@@ -31,7 +31,9 @@ function App() {
 
   return (
     <>
-      <Header>{user ? <NavBar user={user} setUser={setUser} /> : null}</Header>
+      <Header>
+        <NavBar user={user} setUser={setUser} />
+      </Header>
       <Content>
         <BrowserRouter>
           <Switch>

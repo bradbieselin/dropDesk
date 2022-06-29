@@ -10,8 +10,17 @@ const Form = styled.form`
 const Input = styled.input`
   height: 50%;
   width: 100%;
-  display: block;
-  margin-bottom: 1rem;
+  margin: 1rem;
+  text-align: center;
+`;
+
+const Switch = styled.div`
+  margin: 1rem;
+  margin-top: 2rem;
+`;
+
+const Error = styled.div`
+  font-size: 1rem;
 `;
 
 const SignUp = ({ onLogin }) => {
@@ -49,7 +58,7 @@ const SignUp = ({ onLogin }) => {
     <Container>
       <Form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Username:</label>
           <Input
             type="text"
             id="username"
@@ -59,7 +68,7 @@ const SignUp = ({ onLogin }) => {
           />
         </div>
         <div>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email:</label>
           <Input
             type="text"
             id="email"
@@ -69,7 +78,7 @@ const SignUp = ({ onLogin }) => {
           />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password:</label>
           <Input
             type="password"
             id="password"
@@ -81,11 +90,11 @@ const SignUp = ({ onLogin }) => {
         <button type="submit">{isLoading ? "Loading..." : "Sign Up"} </button>
         <div>
           {errors.map((err) => (
-            <error key={err}>{err}. </error>
+            <Error key={err}>{err}. </Error>
           ))}
         </div>
       </Form>
-      <p>Already have an account?</p>
+      <Switch>Already have an account?</Switch>
     </Container>
   );
 };

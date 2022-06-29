@@ -8,13 +8,13 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_resp
             render json: user.tickets, status: 200
         else
             tickets = Ticket.all
-            render json: tickets, include: :user, status: 200
+            render json: tickets, include: [:user, :category], status: 200
         end
     end
 
     def show
         ticket = Ticket.find_by(id: params[:id])
-        render json: ticket, include: :user, status: 200
+        render json: ticket, include: [:user, :category], status: 200
     end
 
     def create 
@@ -37,7 +37,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_resp
     private
 
     def ticket_params
-        params.permit(:title, :category_id, :user_id)
+        params.permit(:title, :description, :category_id, :user_id)
     end
 
     def render_not_found

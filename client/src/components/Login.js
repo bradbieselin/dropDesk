@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-    width: 10%;
+  width: 100%;
 `;
 
 const Form = styled.form`
@@ -12,14 +12,16 @@ const Form = styled.form`
 
 const Input = styled.input`
   height: 50%;
-  width: 100%;
-  display: block;
-  margin-bottom: 1rem;
+  margin: 1rem;
   text-align: center;
 `;
 
 const LoginButton = styled.button`
   margin: 1rem;
+`;
+
+const Error = styled.div`
+  font-size: 1rem;
 `;
 
 const Login = ({ onLogin }) => {
@@ -75,7 +77,7 @@ const Login = ({ onLogin }) => {
         </LoginButton>
         <div>
           {errors.map((err) => (
-            <error key={err}>{err}</error>
+            <Error key={err}>{err}</Error>
           ))}
         </div>
       </Form>
