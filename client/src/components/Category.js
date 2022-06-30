@@ -80,7 +80,7 @@ const Category = ({ category, user, setCategories, id }) => {
               return (
                 <Ticket
                   ticket={ticket}
-                  key={index}
+                  key={ticket.id}
                   setCategories={setCategories}
                   id={ticket.id}
                   index={index}
