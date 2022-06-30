@@ -10,11 +10,6 @@
         "deploy": "cp -a client/build/. public/",
         "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
     },
-    "dependencies": {
-        "@reduxjs/toolkit": "^1.8.3",
-        "react-redux": "^8.0.2",
-        "redux": "^4.2.0"
-    },
     "devDependencies": {
         "@redux-devtools/core": "^3.13.1"
     }
