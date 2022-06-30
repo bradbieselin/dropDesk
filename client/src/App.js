@@ -26,7 +26,7 @@ function App() {
       }
     });
   }, []);
-
+  
   if (!user) return <LandingPage onLogin={setUser} />;
 
   return (

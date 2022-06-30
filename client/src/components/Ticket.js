@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 
 const Container = styled.div`
-  margin: 1rem;
-  border: 1px solid black;
+  margin: 0 0 8px 0;
   background-color: rgba(140, 240, 255);
 `;
 
@@ -38,14 +37,20 @@ const Ticket = ({ ticket, setCategories, id, index }) => {
 
   return (
     <Draggable draggableId={id.toString()} index={index}>
-      {(provided) =>
+      {(provided, snapshot) =>
         isDeleted ? null : (
           <div
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            <Container>
+            <Container
+              style={{
+                backgroundColor: snapshot.isDragging
+                  ? "aquamarine"
+                  : "rgba(140, 240, 255)",
+              }}
+            >
               <Title>{ticket.title}</Title>
               <Gradient></Gradient>
               <Description>{ticket.description}</Description>

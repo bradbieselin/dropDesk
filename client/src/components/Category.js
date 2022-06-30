@@ -11,7 +11,7 @@ const Container = styled.div`
   text-align: center;
   width: 20rem;
   font-size: 1.5rem;
-  padding: 1rem;
+  padding: 4px;
   margin: 1rem;
 `;
 
@@ -24,11 +24,16 @@ const Gradient = styled.div`
 const FormContainer = styled.div`
   margin: 1rem;
   border: 1px solid black;
-  background-color: rgba(140, 240, 255);
+  backgroundColor: rgba(140, 240, 255);
 `;
 
 const Button = styled.button`
   margin-left: 1rem;
+`;
+
+const DropDiv = styled.div`
+  min-height: 50vh;
+  padding: 4px;
 `;
 
 const Category = ({ category, user, setCategories, id }) => {
@@ -74,8 +79,14 @@ const Category = ({ category, user, setCategories, id }) => {
         </FormContainer>
       ) : null}
       <Droppable droppableId={id.toString()}>
-        {(provided) => (
-          <div {...provided.droppableProps} ref={provided.innerRef}>
+        {(provided, snapshot) => (
+          <DropDiv
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            style={{
+              background: snapshot.isDraggingOver ? "lightblue" : "",
+            }}
+          >
             {category.tickets.map((ticket, index) => {
               return (
                 <Ticket
@@ -88,7 +99,7 @@ const Category = ({ category, user, setCategories, id }) => {
               );
             })}
             {provided.placeholder}
-          </div>
+          </DropDiv>
         )}
       </Droppable>
     </Container>
