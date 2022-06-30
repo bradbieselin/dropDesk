@@ -19,7 +19,7 @@ const Container = styled.div`
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  backgroundColor: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 0.25em;
   box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
