@@ -10,7 +10,14 @@ const Container = styled.div`
 `;
 
 const TicketPage = ({ user }) => {
-  const onDragEnd = () => {};
+  const onDragEnd = (result) => {
+    const { destination, source, draggableId} = result;
+    if(!destination) {
+      return;
+    }
+
+    
+  };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>

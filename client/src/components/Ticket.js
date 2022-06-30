@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Draggable } from "react-beautiful-dnd";
 
 const Container = styled.div`
   margin: 1rem;
@@ -21,7 +22,7 @@ const Description = styled.div`
   font-size: 1rem;
 `;
 
-const Ticket = ({ ticket, setCategories }) => {
+const Ticket = ({ ticket, setCategories, id, index }) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const handleDelete = (e) => {
     e.preventDefault();
@@ -36,16 +37,24 @@ const Ticket = ({ ticket, setCategories }) => {
   };
 
   return (
-    <>
-      {isDeleted ? null : (
-        <Container>
-          <Title>{ticket.title}</Title>
-          <Gradient></Gradient>
-          <Description>{ticket.description}</Description>
-          <button onClick={handleDelete}>Delete</button>
-        </Container>
-      )}
-    </>
+    <Draggable draggableId={id.toString()} index={index}>
+      {(provided) =>
+        isDeleted ? null : (
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <Container>
+              <Title>{ticket.title}</Title>
+              <Gradient></Gradient>
+              <Description>{ticket.description}</Description>
+              <button onClick={handleDelete}>Delete</button>
+            </Container>
+          </div>
+        )
+      }
+    </Draggable>
   );
 };
 
