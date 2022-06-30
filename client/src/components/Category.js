@@ -58,24 +58,24 @@ const Category = ({ category, user, setCategories, id }) => {
   };
 
   return (
-    <Droppable droppableId={id.toString()}>
-      {(provided) => (
-        <Container {...provided.droppableProps} ref={provided.innerRef}>
-          {category.title}
-          <Button onClick={() => setIsClicked(!isClicked)}>Add</Button>
-          <Gradient></Gradient>
-          {isClicked ? (
-            <FormContainer>
-              <form onSubmit={handleSubmit}>
-                <label>Title</label>
-                <input onChange={(e) => setTitle(e.target.value)}></input>
-                <label>Description</label>
-                <input onChange={(e) => setDescription(e.target.value)}></input>
-                <button type="submit">Submit</button>
-              </form>
-            </FormContainer>
-          ) : null}
-          <div>
+    <Container>
+      {category.title}
+      <Button onClick={() => setIsClicked(!isClicked)}>Add</Button>
+      <Gradient></Gradient>
+      {isClicked ? (
+        <FormContainer>
+          <form onSubmit={handleSubmit}>
+            <label>Title</label>
+            <input onChange={(e) => setTitle(e.target.value)}></input>
+            <label>Description</label>
+            <input onChange={(e) => setDescription(e.target.value)}></input>
+            <button type="submit">Submit</button>
+          </form>
+        </FormContainer>
+      ) : null}
+      <Droppable droppableId={id.toString()}>
+        {(provided) => (
+          <div {...provided.droppableProps} ref={provided.innerRef}>
             {category.tickets.map((ticket, index) => {
               return (
                 <Ticket
@@ -87,11 +87,11 @@ const Category = ({ category, user, setCategories, id }) => {
                 />
               );
             })}
+            {provided.placeholder}
           </div>
-          {provided.placeholder}
-        </Container>
-      )}
-    </Droppable>
+        )}
+      </Droppable>
+    </Container>
   );
 };
 
