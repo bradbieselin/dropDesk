@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Ticket from "./Ticket";
 import { Droppable } from "react-beautiful-dnd";
+import { transformData } from "./Categories";
 
 const Container = styled.div`
   background-color: rgba(255, 255, 255, 0.8);
@@ -41,7 +42,7 @@ const Category = ({ category, user, setCategories, id }) => {
       title: title,
       description: description,
       user_id: user.id,
-      category_id: category.id,
+      category_id: id,
     };
     fetch("/tickets", {
       method: "POST",
@@ -50,6 +51,7 @@ const Category = ({ category, user, setCategories, id }) => {
     }).then(
       fetch("/categories")
         .then((r) => r.json())
+        .then(transformData)
         .then(setCategories)
     );
     setIsClicked(false);
@@ -80,7 +82,7 @@ const Category = ({ category, user, setCategories, id }) => {
                   ticket={ticket}
                   key={index}
                   setCategories={setCategories}
-                  id={ticket.id.toString()}
+                  id={ticket.id}
                   index={index}
                 />
               );
