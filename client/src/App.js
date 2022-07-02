@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
 import TicketPage from "./components/TicketPage";
-import Login from "./components/Login";
 import NavBar from "./components/NavBar";
 import styled from "styled-components";
 import "./App.css";
@@ -26,7 +25,7 @@ function App() {
       }
     });
   }, []);
-  
+
   if (!user) return <LandingPage onLogin={setUser} />;
 
   return (

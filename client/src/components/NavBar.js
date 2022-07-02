@@ -51,7 +51,7 @@ const NavBar = ({ user, setUser }) => {
 
   return (
     <NavLogoDiv>
-      <NavLogo>DropDesk</NavLogo>
+      <NavLogo>dropDesk</NavLogo>
       <NavUl>
         <NavItem style={linkStyle} onClick={handleLogoutClick}>
           Logout

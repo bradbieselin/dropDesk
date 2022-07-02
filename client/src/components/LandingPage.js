@@ -40,7 +40,7 @@ const LandingPage = ({ onLogin }) => {
   const [login, setLogin] = useState(true);
   const [signup, setSignup] = useState(false);
 
-  const title = "DropDesk";
+  const title = "dropDesk";
 
   return (
     <Wrapper>
