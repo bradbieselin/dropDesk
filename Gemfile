@@ -54,3 +54,5 @@ gem 'active_model_serializers',
 
 
 gem 'email_validator'
+
+gem "faker"

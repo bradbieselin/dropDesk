@@ -23,16 +23,33 @@ brad = User.create(username: "brad", email: "brad@bradbieselin.com", password: "
 sarah = User.create(username: "sarah", email: "sheldrickse@gmail.com", password: "test");
 tom = User.create(username: "tom", email: "tom@gmail.com", password: "test");
 
+100.times do
+    User.create(
+        username: Faker::Internet.username,
+        email: Faker::Internet.email,
+        password: Faker::Internet.password
+    )
+end
+
 puts "Finished seeding users!"
 
 
 puts "Seeding tickets..."
 
-Ticket.create(title: "Monday meeting", user_id: brad.id, category_id: meetings.id, description: "Meeting to discuss X : 10:15am");
-Ticket.create(title: "FIX BUG", user_id: sarah.id, category_id: urgent.id, description: "FIX BUG breaking everything");
-Ticket.create(title: "Update UI", user_id: tom.id, category_id: inProgress.id, description: "Updating UI");
-Ticket.create(title: "Tuesday meeting", user_id: brad.id, category_id: meetings.id, description: "Meeting to discuss X : 9am");
-Ticket.create(title: "Tuesday meeting", user_id: sarah.id, category_id: meetings.id, description: "Meeting to discuss X : 9am");
-Ticket.create(title: "App release", user_id: brad.id, category_id: needsReview.id, description: "New app release");
+# Ticket.create(title: "Monday meeting", user_id: brad.id, category_id: meetings.id, description: "Meeting to discuss X : 10:15am");
+# Ticket.create(title: "FIX BUG", user_id: sarah.id, category_id: urgent.id, description: "FIX BUG breaking everything");
+# Ticket.create(title: "Update UI", user_id: tom.id, category_id: inProgress.id, description: "Updating UI");
+# Ticket.create(title: "Tuesday meeting", user_id: brad.id, category_id: meetings.id, description: "Meeting to discuss X : 9am");
+# Ticket.create(title: "Tuesday meeting", user_id: sarah.id, category_id: meetings.id, description: "Meeting to discuss X : 9am");
+# Ticket.create(title: "App release", user_id: brad.id, category_id: needsReview.id, description: "New app release");
+
+40.times do
+    Ticket.create(
+        title: Faker::Marketing.buzzwords,
+        user_id: Faker::Number.between(from: 1, to: 100),
+        category_id: Faker::Number.between(from: 1, to: 5),
+        description: Faker::Company.catch_phrase
+    )
+end
 
 puts "Finished seeding tickets!"

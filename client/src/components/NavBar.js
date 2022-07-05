@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const NavLogoDiv = styled.div`
@@ -10,12 +10,6 @@ const NavLogoDiv = styled.div`
   top: 0;
   margin-left: 2rem;
   margin-right: 2rem;
-`;
-
-const NavLogo = styled.p`
-  list-style-type: none;
-  font-size: 1.5rem;
-  margin: 1rem;
 `;
 
 const NavUl = styled.ul`
@@ -32,6 +26,15 @@ const linkStyle = {
   margin: "1rem",
   textDecoration: "none",
   cursor: "pointer",
+  color: "black",
+};
+
+const logoLinkStyle = {
+  margin: "1rem",
+  textDecoration: "none",
+  cursor: "pointer",
+  color: "black",
+  fontSize: "1.5rem",
 };
 
 const NavItem = styled.p`
@@ -41,18 +44,26 @@ const NavItem = styled.p`
 `;
 
 const NavBar = ({ user, setUser }) => {
+  const history = useHistory();
+
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         setUser(null);
+        history.push("/");
       }
     });
   }
 
   return (
     <NavLogoDiv>
-      <NavLogo>dropDesk</NavLogo>
+      <Link to="/" style={logoLinkStyle}>
+        dropDesk
+      </Link>
       <NavUl>
+        <Link to="/user" style={logoLinkStyle}>
+          {user.username}
+        </Link>
         <NavItem style={linkStyle} onClick={handleLogoutClick}>
           Logout
         </NavItem>

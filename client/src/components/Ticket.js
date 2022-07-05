@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 
 const Container = styled.div`
-  margin: 0 0 8px 0;
+  margin: 0 0 4px 0;
   background-color: rgba(140, 240, 255);
+  user-select: none;
 `;
 
 const Title = styled.div`
@@ -19,6 +20,12 @@ const Gradient = styled.div`
 
 const Description = styled.div`
   font-size: 1rem;
+  overflow-wrap: break-word;
+  margin: 0.5rem;
+`;
+
+const DeleteButton = styled.button`
+  margin: 0.5rem;
 `;
 
 const Ticket = ({ ticket, setCategories, id, index }) => {
@@ -54,7 +61,8 @@ const Ticket = ({ ticket, setCategories, id, index }) => {
               <Title>{ticket.title}</Title>
               <Gradient></Gradient>
               <Description>{ticket.description}</Description>
-              <button onClick={handleDelete}>Delete</button>
+              <Description>User: {ticket.username}</Description>
+              <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
             </Container>
           </div>
         )

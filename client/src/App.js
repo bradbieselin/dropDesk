@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
 import TicketPage from "./components/TicketPage";
 import NavBar from "./components/NavBar";
+import Login from "./components/Login";
 import styled from "styled-components";
 import "./App.css";
 
@@ -34,13 +35,14 @@ function App() {
         <NavBar user={user} setUser={setUser} />
       </Header>
       <Content>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/">
-              <TicketPage user={user} />
-            </Route>
-          </Switch>
-        </BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <TicketPage user={user} />
+          </Route>
+          <Route path="/user">
+            <Login />
+          </Route>
+        </Switch>
       </Content>
     </>
   );

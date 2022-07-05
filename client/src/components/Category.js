@@ -13,6 +13,7 @@ const Container = styled.div`
   font-size: 1.5rem;
   padding: 4px;
   margin: 1rem;
+  height: 90vh;
 `;
 
 const Gradient = styled.div`
@@ -24,7 +25,7 @@ const Gradient = styled.div`
 const FormContainer = styled.div`
   margin: 1rem;
   border: 1px solid black;
-  backgroundColor: rgba(140, 240, 255);
+  backgroundcolor: rgba(140, 240, 255);
 `;
 
 const Button = styled.button`
@@ -32,8 +33,19 @@ const Button = styled.button`
 `;
 
 const DropDiv = styled.div`
-  min-height: 50vh;
+  min-height: 78vh;
   padding: 4px;
+`;
+
+const CategoryTitle = styled.div`
+  height: 5vh;
+`;
+
+const TicketContainer = styled.div`
+  height: 83vh;
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: ;
 `;
 
 const Category = ({ category, user, setCategories, id }) => {
@@ -64,44 +76,48 @@ const Category = ({ category, user, setCategories, id }) => {
 
   return (
     <Container>
-      {category.title}
-      <Button onClick={() => setIsClicked(!isClicked)}>Add</Button>
-      <Gradient></Gradient>
-      {isClicked ? (
-        <FormContainer>
-          <form onSubmit={handleSubmit}>
-            <label>Title</label>
-            <input onChange={(e) => setTitle(e.target.value)}></input>
-            <label>Description</label>
-            <input onChange={(e) => setDescription(e.target.value)}></input>
-            <button type="submit">Submit</button>
-          </form>
-        </FormContainer>
-      ) : null}
-      <Droppable droppableId={id.toString()}>
-        {(provided, snapshot) => (
-          <DropDiv
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            style={{
-              background: snapshot.isDraggingOver ? "lightblue" : "",
-            }}
-          >
-            {category.tickets.map((ticket, index) => {
-              return (
-                <Ticket
-                  ticket={ticket}
-                  key={ticket.id}
-                  setCategories={setCategories}
-                  id={ticket.id}
-                  index={index}
-                />
-              );
-            })}
-            {provided.placeholder}
-          </DropDiv>
-        )}
-      </Droppable>
+      <CategoryTitle>
+        {category.title}
+        <Button onClick={() => setIsClicked(!isClicked)}>Add</Button>
+        <Gradient></Gradient>
+      </CategoryTitle>
+      <TicketContainer>
+        {isClicked ? (
+          <FormContainer>
+            <form onSubmit={handleSubmit}>
+              <label>Title</label>
+              <input onChange={(e) => setTitle(e.target.value)}></input>
+              <label>Description</label>
+              <input onChange={(e) => setDescription(e.target.value)}></input>
+              <button type="submit">Submit</button>
+            </form>
+          </FormContainer>
+        ) : null}
+        <Droppable droppableId={id.toString()}>
+          {(provided, snapshot) => (
+            <DropDiv
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              style={{
+                background: snapshot.isDraggingOver ? "lightblue" : "",
+              }}
+            >
+              {category.tickets.map((ticket, index) => {
+                return (
+                  <Ticket
+                    ticket={ticket}
+                    key={ticket.id}
+                    setCategories={setCategories}
+                    id={ticket.id}
+                    index={index}
+                  />
+                );
+              })}
+              {provided.placeholder}
+            </DropDiv>
+          )}
+        </Droppable>
+      </TicketContainer>
     </Container>
   );
 };
