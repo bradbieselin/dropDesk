@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
 import TicketPage from "./components/TicketPage";
 import NavBar from "./components/NavBar";
-import Login from "./components/Login";
+import UserPage from "./components/UserPage";
 import styled from "styled-components";
 import "./App.css";
 
@@ -40,7 +40,7 @@ function App() {
             <TicketPage user={user} />
           </Route>
           <Route path="/user">
-            <Login />
+            <UserPage user={user} />
           </Route>
         </Switch>
       </Content>

@@ -8,6 +8,7 @@ export const transformData = (arrayOfCategories) => {
     categoryKey[category.id] = {
       title: category.title,
       tickets: category.tickets,
+      id: category.id,
     };
   });
   return categoryKey;
@@ -33,17 +34,24 @@ const Categories = ({ user }) => {
       const destTickets = [...destCategory.tickets];
       const [removed] = sourceTickets.splice(source.index, 1);
       destTickets.splice(destination.index, 0, removed);
-      setCategories({
-        ...categories,
-        [source.droppableId]: {
-          ...sourceCategory,
-          tickets: sourceTickets,
-        },
-        [destination.droppableId]: {
-          ...destCategory,
-          tickets: destTickets,
-        },
-      });
+
+      fetch(`/tickets/${removed.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ category_id: destCategory.id }),
+      }).then(
+        setCategories({
+          ...categories,
+          [source.droppableId]: {
+            ...sourceCategory,
+            tickets: sourceTickets,
+          },
+          [destination.droppableId]: {
+            ...destCategory,
+            tickets: destTickets,
+          },
+        })
+      );
     } else {
       const category = categories[source.droppableId];
       const copiedTickets = [...category.tickets];

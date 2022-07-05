@@ -43,7 +43,7 @@ const CategoryTitle = styled.div`
 
 const TicketContainer = styled.div`
   height: 83vh;
-  padding: 1rem;
+  margin: 0.5rem;
   overflow-y: auto;
   overflow-x: ;
 `;
