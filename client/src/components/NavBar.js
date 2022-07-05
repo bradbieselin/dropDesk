@@ -62,7 +62,10 @@ const NavBar = ({ user, setUser }) => {
       </Link>
       <NavUl>
         <Link to="/user" style={logoLinkStyle}>
-          {user.username}
+          Account
+        </Link>
+        <Link to="/tickets" style={logoLinkStyle}>
+          Edit Tickets
         </Link>
         <NavItem style={linkStyle} onClick={handleLogoutClick}>
           Logout

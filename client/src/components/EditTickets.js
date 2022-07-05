@@ -31,26 +31,23 @@ const Gradient = styled.div`
   width: 96%;
 `;
 
-const H2 = styled.h2`
-  margin: 1rem;
-  padding: 0;
-`;
+const EditTickets = ({ user }) => {
+  const ticketGroup = user.tickets.map((ticket) => {
+    return (
+      <div>
+        {ticket.id}: {ticket.title}
+      </div>
+    );
+  });
 
-const UserPage = ({ user }) => {
   return (
     <>
       <div className="bg"></div>
       <div className="bg bg2"></div>
       <div className="bg bg3"></div>
-      <Container>
-        <H2>Welcome, {user.username}!</H2>
-        <Gradient></Gradient>
-        <h3>Email: {user.email}</h3>
-
-        <button>Update Email</button>
-      </Container>
+      <Container>{ticketGroup}</Container>
     </>
   );
 };
 
-export default UserPage;
+export default EditTickets;

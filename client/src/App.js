@@ -4,6 +4,7 @@ import LandingPage from "./components/LandingPage";
 import TicketPage from "./components/TicketPage";
 import NavBar from "./components/NavBar";
 import UserPage from "./components/UserPage";
+import EditTickets from "./components/EditTickets";
 import styled from "styled-components";
 import "./App.css";
 
@@ -17,6 +18,7 @@ const Header = styled.header`
 
 function App() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // auto-login
@@ -24,8 +26,11 @@ function App() {
       if (r.ok) {
         r.json().then((user) => setUser(user));
       }
+      setLoading(false);
     });
   }, []);
+
+  if (loading) return null;
 
   if (!user) return <LandingPage onLogin={setUser} />;
 
@@ -41,6 +46,9 @@ function App() {
           </Route>
           <Route path="/user">
             <UserPage user={user} />
+          </Route>
+          <Route path="/tickets">
+            <EditTickets user={user} />
           </Route>
         </Switch>
       </Content>
