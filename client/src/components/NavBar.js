@@ -64,9 +64,6 @@ const NavBar = ({ user, setUser }) => {
         <Link to="/user" style={logoLinkStyle}>
           Account
         </Link>
-        <Link to="/tickets" style={logoLinkStyle}>
-          Edit Tickets
-        </Link>
         <NavItem style={linkStyle} onClick={handleLogoutClick}>
           Logout
         </NavItem>

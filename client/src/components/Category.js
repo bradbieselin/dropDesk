@@ -12,8 +12,9 @@ const Container = styled.div`
   width: 20rem;
   font-size: 1.5rem;
   padding: 4px;
-  margin: 1rem;
-  height: 90vh;
+  margin: 8px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Gradient = styled.div`
@@ -23,9 +24,16 @@ const Gradient = styled.div`
 `;
 
 const FormContainer = styled.div`
-  margin: 1rem;
-  border: 1px solid black;
-  backgroundcolor: rgba(140, 240, 255);
+  user-select: none;
+  border-radius: 2px;
+  border: 2px solid transparent;
+  box-shadow: none;
+  box-sizing: border-box;
+  padding: 8px 8px 0px;
+  background: #b1d4e0;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
 `;
 
 const Button = styled.button`
@@ -33,8 +41,14 @@ const Button = styled.button`
 `;
 
 const DropDiv = styled.div`
-  min-height: 78vh;
-  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  opacity: inherit;
+  padding: 8px 8px 0px;
+  border: 8px;
+  transition: background-color 0.2s ease 0s, opacity 0.1s ease 0s;
+  user-select: none;
+  height: 83vh;
 `;
 
 const CategoryTitle = styled.div`
@@ -46,6 +60,27 @@ const TicketContainer = styled.div`
   margin: 0.5rem;
   overflow-y: auto;
   overflow-x: ;
+`;
+
+const Label = styled.label`
+  display: block;
+  text-align: center;
+  line-height: 150%;
+  font-size: 0.85em;
+`;
+
+const Input = styled.input`
+  height: 2rem;
+  width: 85%;
+  text-align: center;
+`;
+
+const TextArea = styled.textarea`
+  height: 100px;
+  width: 95%;
+  padding: 1%;
+  border: none;
+  resize: none;
 `;
 
 const Category = ({ category, user, setCategories, id }) => {
@@ -85,10 +120,13 @@ const Category = ({ category, user, setCategories, id }) => {
         {isClicked ? (
           <FormContainer>
             <form onSubmit={handleSubmit}>
-              <label>Title</label>
-              <input onChange={(e) => setTitle(e.target.value)}></input>
-              <label>Description</label>
-              <input onChange={(e) => setDescription(e.target.value)}></input>
+              <Label>Title</Label>
+              <Input onChange={(e) => setTitle(e.target.value)}></Input>
+              <Gradient></Gradient>
+              <Label>Description</Label>
+              <TextArea
+                onChange={(e) => setDescription(e.target.value)}
+              ></TextArea>
               <button type="submit">Submit</button>
             </form>
           </FormContainer>
@@ -99,7 +137,7 @@ const Category = ({ category, user, setCategories, id }) => {
               {...provided.droppableProps}
               ref={provided.innerRef}
               style={{
-                background: snapshot.isDraggingOver ? "lightblue" : "",
+                background: snapshot.isDraggingOver ? "#C2E5D3" : "",
               }}
             >
               {category.tickets.map((ticket, index) => {

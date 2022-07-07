@@ -4,11 +4,14 @@ import LandingPage from "./components/LandingPage";
 import TicketPage from "./components/TicketPage";
 import NavBar from "./components/NavBar";
 import UserPage from "./components/UserPage";
-import EditTickets from "./components/EditTickets";
 import styled from "styled-components";
 import "./App.css";
 
-const Content = styled.div``;
+const Content = styled.div`
+  margin: 0;
+  padding: 0;
+  /* background: rgb(9, 30, 66); */
+`;
 
 const Header = styled.header`
   width: 100%;
@@ -46,9 +49,6 @@ function App() {
           </Route>
           <Route path="/user">
             <UserPage user={user} />
-          </Route>
-          <Route path="/tickets">
-            <EditTickets user={user} />
           </Route>
         </Switch>
       </Content>
