@@ -53,7 +53,10 @@ const H3 = styled.h3`
 
 const UserPage = ({ user }) => {
   const [emailClicked, setEmailClicked] = useState(false);
-  const [email, setEmail] = useState(user.email);
+  const [email, setEmail] = useState("");
+  const [updatedEmail, setUpdatedEmail] = useState(false);
+  const [displayEmail, setDisplayEmail] = useState("");
+  const [errors, setErrors] = useState([]);
 
   function handleSubmitEmail(e) {
     e.preventDefault();
@@ -63,10 +66,16 @@ const UserPage = ({ user }) => {
       body: JSON.stringify({ email: email }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((d) => setEmail(d.email));
+        r.json().then((d) => {
+          setEmail("");
+          setUpdatedEmail(true);
+          setEmailClicked(false);
+          setDisplayEmail(d.email);
+        });
+      } else {
+        r.json().then((err) => setErrors(err.errors));
       }
     });
-    setEmailClicked(false);
   }
 
   return (
@@ -81,7 +90,7 @@ const UserPage = ({ user }) => {
           <>
             <Form onSubmit={handleSubmitEmail}>
               <label>Current Email:</label>
-              <H3>{user.email}</H3>
+              <H3>{updatedEmail ? displayEmail : user.email}</H3>
               <label>Update Email:</label>
               <Input
                 type="text"
@@ -91,10 +100,15 @@ const UserPage = ({ user }) => {
               />
               <button type="submit">Submit</button>
             </Form>
+            <div>
+              {errors.map((err) => (
+                <error key={err}>{err}</error>
+              ))}
+            </div>
           </>
         ) : (
           <>
-            <h3>Email: {email}</h3>
+            <h3>Email: {updatedEmail ? displayEmail : user.email}</h3>
             <button
               onClick={() => {
                 setEmailClicked(true);

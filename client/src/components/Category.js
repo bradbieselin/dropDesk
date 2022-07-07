@@ -83,7 +83,14 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
-const Category = ({ category, user, setCategories, categories, id }) => {
+const Category = ({
+  category,
+  user,
+  setCategories,
+  categories,
+  id,
+  onTicketUpdate,
+}) => {
   const [isClicked, setIsClicked] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -149,6 +156,7 @@ const Category = ({ category, user, setCategories, categories, id }) => {
                     id={ticket.id}
                     index={index}
                     categories={categories}
+                    onTicketUpdate={onTicketUpdate}
                   />
                 );
               })}

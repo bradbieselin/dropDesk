@@ -84,11 +84,13 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
-const Ticket = ({ ticket, setCategories, id, index }) => {
+const Ticket = ({ ticket, setCategories, id, index, onTicketUpdate }) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [edit, setEdit] = useState(false);
   const [title, setTitle] = useState(ticket.title);
   const [description, setDescription] = useState(ticket.description);
+  const [display, setDisplay] = useState({ title: "", description: "" });
+  const [updatedTicket, setUpdatedTicket] = useState(false);
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -108,11 +110,13 @@ const Ticket = ({ ticket, setCategories, id, index }) => {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title: title, description: description }),
-    }).then(
-      fetch("/categories")
-        .then((r) => r.json())
-        .then(setCategories)
-    );
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        setUpdatedTicket(true);
+        setDisplay(data);
+        onTicketUpdate(data);
+      });
     setEdit(false);
   };
 
@@ -155,10 +159,12 @@ const Ticket = ({ ticket, setCategories, id, index }) => {
                 backgroundColor: snapshot.isDragging ? "aquamarine" : "#B1D4E0",
               }}
             >
-              <Title>{ticket.title}</Title>
+              <Title>{updatedTicket ? display.title : ticket.title}</Title>
               <Gradient></Gradient>
               <ContentContainer>
-                <Description>{ticket.description}</Description>
+                <Description>
+                  {updatedTicket ? display.description : ticket.description}
+                </Description>
                 <UserContainer>
                   <Small>User: {ticket.username}</Small>
                 </UserContainer>

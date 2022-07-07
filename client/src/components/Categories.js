@@ -16,12 +16,28 @@ export const transformData = (arrayOfCategories) => {
 
 const Categories = ({ user }) => {
   const [categories, setCategories] = useState([]);
+
   useEffect(() => {
     fetch("/categories")
       .then((r) => r.json())
       .then(transformData)
       .then(setCategories);
   }, []);
+
+  function onTicketUpdate(updatedTicket) {
+    const categoryToUpdate = Object.keys(categories).find((category) => {
+      return category.tickets.map((ticket) => ticket.id === updatedTicket.id);
+    });
+
+    const newTickets = categoryToUpdate.tickets.map((ticket) => {
+      if (ticket.id === updatedTicket.id) {
+        return updatedTicket;
+      }
+      return ticket;
+    });
+
+    setCategories({ ...categories, tickets: newTickets });
+  }
 
   const onDragEnd = (result, categories, setCategories) => {
     if (!result.destination) return;
@@ -76,6 +92,7 @@ const Categories = ({ user }) => {
         setCategories={setCategories}
         id={category_id}
         categories={categories}
+        onTicketUpdate={onTicketUpdate}
       />
     );
   });
