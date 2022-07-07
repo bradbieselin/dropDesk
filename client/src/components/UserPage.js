@@ -61,6 +61,10 @@ const UserPage = ({ user }) => {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email }),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((d) => setEmail(d.email));
+      }
     });
     setEmailClicked(false);
   }
@@ -90,7 +94,7 @@ const UserPage = ({ user }) => {
           </>
         ) : (
           <>
-            <h3>Email: {user.email}</h3>
+            <h3>Email: {email}</h3>
             <button
               onClick={() => {
                 setEmailClicked(true);
