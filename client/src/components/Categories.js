@@ -75,6 +75,7 @@ const Categories = ({ user }) => {
         user={user}
         setCategories={setCategories}
         id={category_id}
+        categories={categories}
       />
     );
   });
