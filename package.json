@@ -1,9 +1,6 @@
 {
   "name": "phase-5-project",
   "description": "Build scripts for Heroku",
-  "engines": {
-    "node": "16.x"
-  },
   "scripts": {
     "build": "npm install --prefix client && npm run build --prefix client",
     "clean": "rm -rf public",
