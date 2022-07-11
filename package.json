@@ -12,5 +12,8 @@
     },
     "devDependencies": {
         "@redux-devtools/core": "^3.13.1"
+    },
+    "dependencies": {
+        "react-beautiful-dnd": "^13.1.0"
     }
 }
