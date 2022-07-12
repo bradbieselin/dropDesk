@@ -6,12 +6,13 @@ const Container = styled.div`
   display: inline-flex;
   justify-content: center;
   overflow-anchor: none;
-  min-height: 83vh;
-  min-width: 100vw;
+  /* min-height: 83vh; */
+  /* min-width: 100vw; */
   display: inline-flex;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   touch-action: manipulation;
+  max-height: auto;
 `;
 
 const TicketPage = ({ user }) => {

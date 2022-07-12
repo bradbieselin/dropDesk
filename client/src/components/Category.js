@@ -15,6 +15,7 @@ const Container = styled.div`
   margin: 8px;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 const Gradient = styled.div`
@@ -48,7 +49,7 @@ const DropDiv = styled.div`
   border: 8px;
   transition: background-color 0.2s ease 0s, opacity 0.1s ease 0s;
   user-select: none;
-  height: 83vh;
+  min-height: 83vh;
 `;
 
 const CategoryTitle = styled.div`
