@@ -49,6 +49,7 @@ const DropDiv = styled.div`
   border: 8px;
   transition: background-color 0.2s ease 0s, opacity 0.1s ease 0s;
   user-select: none;
+  /* Adjust height with scroll */
   min-height: 83vh;
 `;
 
