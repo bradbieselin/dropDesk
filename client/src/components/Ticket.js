@@ -85,7 +85,7 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
-const Ticket = ({ ticket, setCategories, id, index, refreshCategories }) => {
+const Ticket = ({ ticket, id, index, refreshCategories }) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [edit, setEdit] = useState(false);
   const [title, setTitle] = useState(ticket.title);
@@ -97,11 +97,7 @@ const Ticket = ({ ticket, setCategories, id, index, refreshCategories }) => {
     e.preventDefault();
     fetch(`/tickets/${ticket.id}`, {
       method: "DELETE",
-    }).then(
-      fetch("/categories")
-        .then((r) => r.json())
-        .then(setCategories)
-    );
+    }).then(refreshCategories());
     setIsDeleted(true);
   };
 
@@ -120,6 +116,12 @@ const Ticket = ({ ticket, setCategories, id, index, refreshCategories }) => {
   const handleReset = (e) => {
     setTitle(initialTitle);
     setDescription(descriptionInit);
+  };
+
+  const handleCancel = (e) => {
+    setTitle(initialTitle);
+    setDescription(descriptionInit);
+    setEdit(false);
   };
 
   return (
@@ -149,6 +151,7 @@ const Ticket = ({ ticket, setCategories, id, index, refreshCategories }) => {
               />
               <input type="submit" value="Submit" />
               <input type="reset" value="Reset" />
+              <button onClick={handleCancel}>Cancel</button>
             </form>
           </Container>
         ) : (

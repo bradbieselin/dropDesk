@@ -79,7 +79,7 @@ const Categories = ({ user }) => {
         key={category_id}
         user={user}
         setCategories={setCategories}
-        id={category_id}
+        categoryId={category_id}
         categories={categories}
         refreshCategories={refreshCategories}
       />

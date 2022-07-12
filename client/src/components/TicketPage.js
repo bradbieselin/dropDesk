@@ -3,7 +3,6 @@ import Categories from "./Categories";
 import styled from "styled-components";
 
 const Container = styled.div`
-  display: inline-flex;
   justify-content: center;
   overflow-anchor: none;
   display: inline-flex;

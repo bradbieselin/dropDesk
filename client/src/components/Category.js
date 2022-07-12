@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Ticket from "./Ticket";
 import { Droppable } from "react-beautiful-dnd";
-import { transformData } from "./Categories";
 
 const Container = styled.div`
   background-color: rgba(255, 255, 255, 0.8);
@@ -90,28 +89,45 @@ const Category = ({
   user,
   setCategories,
   categories,
-  id,
+  categoryId,
   refreshCategories,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setErrors([]);
     const newTicket = {
       title: title,
       description: description,
       user_id: user.id,
-      category_id: id,
+      category_id: categoryId,
     };
     fetch("/tickets", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTicket),
-    })
-      .then((r) => r.json())
-      .then(refreshCategories);
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((data) => {
+          refreshCategories(data);
+          setIsClicked(false);
+          setTitle("");
+          setDescription("");
+        });
+      } else {
+        r.json().then((error) => setErrors(error.errors));
+      }
+    });
+  };
+
+  const handleCancel = () => {
+    setErrors([]);
+    setTitle("");
+    setDescription("");
     setIsClicked(false);
   };
 
@@ -119,7 +135,7 @@ const Category = ({
     <Container>
       <CategoryTitle>
         {category.title}
-        <Button onClick={() => setIsClicked(!isClicked)}>Add</Button>
+        <Button onClick={() => setIsClicked(true)}>Add</Button>
         <Gradient></Gradient>
       </CategoryTitle>
       <TicketContainer>
@@ -134,10 +150,12 @@ const Category = ({
                 onChange={(e) => setDescription(e.target.value)}
               ></TextArea>
               <button type="submit">Submit</button>
+              <button onClick={handleCancel}>Cancel</button>
+              {errors.length ? errors.map((err) => <p>{err}</p>) : null}
             </form>
           </FormContainer>
         ) : null}
-        <Droppable droppableId={id.toString()}>
+        <Droppable droppableId={categoryId.toString()}>
           {(provided, snapshot) => (
             <DropDiv
               {...provided.droppableProps}
