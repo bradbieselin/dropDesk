@@ -5,7 +5,6 @@
     "node": "16.x",
     "npm": "8.7.0"
   },
-  "en"
   "scripts": {
     "build": "npm install --prefix client && npm run build --prefix client",
     "clean": "rm -rf public",
