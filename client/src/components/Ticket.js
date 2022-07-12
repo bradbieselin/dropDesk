@@ -93,8 +93,6 @@ const Ticket = ({ ticket, setCategories, id, index, onTicketUpdate }) => {
   const [initialTitle, setInitialTitle] = useState(ticket.title);
   const [description, setDescription] = useState(ticket.description);
   const [descriptionInit, setDescriptionInit] = useState(ticket.description);
-  const [display, setDisplay] = useState({ title: "", description: "" });
-  const [updatedTicket, setUpdatedTicket] = useState(false);
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -117,8 +115,6 @@ const Ticket = ({ ticket, setCategories, id, index, onTicketUpdate }) => {
     })
       .then((r) => r.json())
       .then((data) => {
-        setUpdatedTicket(true);
-        setDisplay(data);
         onTicketUpdate(data);
         fetch("/categories")
           .then((r) => r.json())
@@ -172,12 +168,10 @@ const Ticket = ({ ticket, setCategories, id, index, onTicketUpdate }) => {
                 backgroundColor: snapshot.isDragging ? "aquamarine" : "#B1D4E0",
               }}
             >
-              <Title>{updatedTicket ? display.title : ticket.title}</Title>
+              <Title>{ticket.title}</Title>
               <Gradient></Gradient>
               <ContentContainer>
-                <Description>
-                  {updatedTicket ? display.description : ticket.description}
-                </Description>
+                <Description>{ticket.description}</Description>
                 <UserContainer>
                   <Small>User: {ticket.username}</Small>
                 </UserContainer>
