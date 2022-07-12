@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
-import { transformData } from "./Categories";
 
 const Container = styled.div`
   user-select: none;
