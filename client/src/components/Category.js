@@ -109,12 +109,9 @@ const Category = ({
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTicket),
-    }).then(
-      fetch("/categories")
-        .then((r) => r.json())
-        .then(transformData)
-        .then(setCategories)
-    );
+    })
+      .then((r) => r.json())
+      .then(refreshCategories);
     setIsClicked(false);
   };
 
