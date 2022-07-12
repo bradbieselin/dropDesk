@@ -84,6 +84,10 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
+const Errors = styled.div`
+  font-size: 1rem;
+`;
+
 const Category = ({
   category,
   user,
@@ -151,7 +155,9 @@ const Category = ({
               ></TextArea>
               <button type="submit">Submit</button>
               <button onClick={handleCancel}>Cancel</button>
-              {errors.length ? errors.map((err) => <p>{err}</p>) : null}
+              <Errors>
+                {errors.length ? errors.map((err) => <p>{err}.</p>) : null}
+              </Errors>
             </form>
           </FormContainer>
         ) : null}
