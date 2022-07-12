@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
+import { transformData } from "./Categories";
 
 const Container = styled.div`
   user-select: none;
@@ -89,7 +90,9 @@ const Ticket = ({ ticket, setCategories, id, index, onTicketUpdate }) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [edit, setEdit] = useState(false);
   const [title, setTitle] = useState(ticket.title);
+  const [initialTitle, setInitialTitle] = useState(ticket.title);
   const [description, setDescription] = useState(ticket.description);
+  const [descriptionInit, setDescriptionInit] = useState(ticket.description);
   const [display, setDisplay] = useState({ title: "", description: "" });
   const [updatedTicket, setUpdatedTicket] = useState(false);
 
@@ -121,6 +124,11 @@ const Ticket = ({ ticket, setCategories, id, index, onTicketUpdate }) => {
     setEdit(false);
   };
 
+  const handleReset = (e) => {
+    setTitle(initialTitle);
+    setDescription(descriptionInit);
+  };
+
   return (
     <Draggable draggableId={id.toString()} index={index}>
       {(provided, snapshot) =>
@@ -130,7 +138,7 @@ const Ticket = ({ ticket, setCategories, id, index, onTicketUpdate }) => {
               backgroundColor: snapshot.isDragging ? "aquamarine" : "#B1D4E0",
             }}
           >
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} onReset={handleReset}>
               <Input
                 type="text"
                 id="title"
@@ -146,7 +154,8 @@ const Ticket = ({ ticket, setCategories, id, index, onTicketUpdate }) => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
-              <button>Save</button>
+              <input type="submit" value="Submit" />
+              <input type="reset" value="Reset" />
             </form>
           </Container>
         ) : (

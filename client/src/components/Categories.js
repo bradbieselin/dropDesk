@@ -24,6 +24,8 @@ const Categories = ({ user }) => {
       .then(setCategories);
   }, []);
 
+  console.log(categories);
+
   function onTicketUpdate(updatedTicket) {
     const categoryToUpdate = Object.keys(categories).find((category) => {
       return category.tickets.map((ticket) => ticket.id === updatedTicket.id);
