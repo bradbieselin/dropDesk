@@ -22,9 +22,7 @@ const Categories = ({ user }) => {
       .then((r) => r.json())
       .then(transformData)
       .then(setCategories);
-  }, []);
-
-  console.log(categories);
+  }, [categories]);
 
   function onTicketUpdate(updatedTicket) {
     const categoryToUpdate = Object.keys(categories).find((category) => {

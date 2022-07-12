@@ -120,6 +120,9 @@ const Ticket = ({ ticket, setCategories, id, index, onTicketUpdate }) => {
         setUpdatedTicket(true);
         setDisplay(data);
         onTicketUpdate(data);
+        fetch("/categories")
+          .then((r) => r.json())
+          .then(setCategories);
       });
     setEdit(false);
   };
