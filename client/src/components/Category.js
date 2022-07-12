@@ -89,7 +89,7 @@ const Category = ({
   setCategories,
   categories,
   id,
-  onTicketUpdate,
+  refreshCategories,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [title, setTitle] = useState("");
@@ -156,7 +156,7 @@ const Category = ({
                     id={ticket.id}
                     index={index}
                     categories={categories}
-                    onTicketUpdate={onTicketUpdate}
+                    refreshCategories={refreshCategories}
                   />
                 );
               })}

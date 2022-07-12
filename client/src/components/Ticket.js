@@ -86,7 +86,7 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
-const Ticket = ({ ticket, setCategories, id, index, onTicketUpdate }) => {
+const Ticket = ({ ticket, setCategories, id, index, refreshCategories }) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [edit, setEdit] = useState(false);
   const [title, setTitle] = useState(ticket.title);
@@ -114,12 +114,7 @@ const Ticket = ({ ticket, setCategories, id, index, onTicketUpdate }) => {
       body: JSON.stringify({ title: title, description: description }),
     })
       .then((r) => r.json())
-      .then((data) => {
-        onTicketUpdate(data);
-        fetch("/categories")
-          .then((r) => r.json())
-          .then(setCategories);
-      });
+      .then(refreshCategories);
     setEdit(false);
   };
 
