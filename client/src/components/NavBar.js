@@ -61,6 +61,9 @@ const NavBar = ({ user, setUser }) => {
         dropDesk
       </Link>
       <NavUl>
+        <Link to="/mytickets" style={logoLinkStyle}>
+          My Tickets
+        </Link>
         <Link to="/user" style={logoLinkStyle}>
           Account
         </Link>

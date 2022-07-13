@@ -9,8 +9,13 @@ class UsersController < ApplicationController
         render json: users, include: :tickets, status: :ok
     end
 
-    def show
+    def me
         render json: @current_user
+    end
+
+    def show
+        user = User.find(params[:id])
+        render json: user, status: :ok
     end
 
     def create

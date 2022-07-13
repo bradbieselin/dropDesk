@@ -4,6 +4,7 @@ import LandingPage from "./components/LandingPage";
 import TicketPage from "./components/TicketPage";
 import NavBar from "./components/NavBar";
 import UserPage from "./components/UserPage";
+import MyTickets from "./components/MyTickets";
 import styled from "styled-components";
 import "./App.css";
 
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route path="/user">
             <UserPage user={user} />
+          </Route>
+          <Route path="/mytickets">
+            <MyTickets user={user} />
           </Route>
         </Switch>
       </Content>
