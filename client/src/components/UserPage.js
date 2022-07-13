@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -51,11 +51,11 @@ const H3 = styled.h3`
   font-size: 2rem;
 `;
 
-const UserPage = ({ user }) => {
+const UserPage = ({ user, refreshUser }) => {
   const [emailClicked, setEmailClicked] = useState(false);
   const [email, setEmail] = useState("");
   const [updatedEmail, setUpdatedEmail] = useState(false);
-  const [displayEmail, setDisplayEmail] = useState("");
+  const [displayEmail, setDisplayEmail] = useState(user.email);
   const [errors, setErrors] = useState([]);
 
   function handleSubmitEmail(e) {
@@ -71,6 +71,7 @@ const UserPage = ({ user }) => {
           setUpdatedEmail(true);
           setEmailClicked(false);
           setDisplayEmail(d.email);
+          refreshUser();
         });
       } else {
         r.json().then((err) => setErrors(err.errors));
@@ -90,7 +91,7 @@ const UserPage = ({ user }) => {
           <>
             <Form onSubmit={handleSubmitEmail}>
               <label>Current Email:</label>
-              <H3>{updatedEmail ? displayEmail : user.email}</H3>
+              <H3>{displayEmail}</H3>
               <label>Update Email:</label>
               <Input
                 type="text"

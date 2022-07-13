@@ -41,6 +41,12 @@ function App() {
 
   if (!user) return <LandingPage onLogin={setUser} />;
 
+  function refreshUser() {
+    fetch("/me")
+      .then((r) => r.json())
+      .then(setUser);
+  }
+
   return (
     <>
       <Header>
@@ -52,7 +58,7 @@ function App() {
             <TicketPage user={user} />
           </Route>
           <Route path="/user">
-            <UserPage user={user} />
+            <UserPage user={user} refreshUser={refreshUser} />
           </Route>
           <Route path="/mytickets">
             <MyTickets user={user} />
