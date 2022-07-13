@@ -41,7 +41,7 @@ puts "Seeding tickets..."
         title: Faker::Marketing.buzzwords,
         user_id: Faker::Number.between(from: 1, to: 100),
         category_id: Faker::Number.between(from: 1, to: 5),
-        description: Faker::Company.catch_phrase
+        description: Faker::Hacker.say_something_smart
     )
 end
 
