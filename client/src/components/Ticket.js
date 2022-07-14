@@ -85,8 +85,13 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
+const Errors = styled.div`
+  font-size: 1rem;
+`;
+
 const Ticket = ({ ticket, id, index, refreshCategories }) => {
   const [isDeleted, setIsDeleted] = useState(false);
+  const [errors, setErrors] = useState([]);
   const [edit, setEdit] = useState(false);
   const [title, setTitle] = useState(ticket.title);
   const [initialTitle, setInitialTitle] = useState(ticket.title);
@@ -107,10 +112,14 @@ const Ticket = ({ ticket, id, index, refreshCategories }) => {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title: title, description: description }),
-    })
-      .then((r) => r.json())
-      .then(refreshCategories);
-    setEdit(false);
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then(refreshCategories);
+        setEdit(false);
+      } else {
+        r.json().then((error) => setErrors(error.errors));
+      }
+    });
   };
 
   const handleReset = (e) => {
@@ -152,6 +161,9 @@ const Ticket = ({ ticket, id, index, refreshCategories }) => {
               <input type="submit" value="Submit" />
               <input type="reset" value="Reset" />
               <button onClick={handleCancel}>Cancel</button>
+              <Errors>
+                {errors.length ? errors.map((err) => <p>{err}.</p>) : null}
+              </Errors>
             </form>
           </Container>
         ) : (
