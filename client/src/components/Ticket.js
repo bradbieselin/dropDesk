@@ -27,7 +27,7 @@ const Gradient = styled.div`
 const Description = styled.div`
   font-size: 1rem;
   overflow-wrap: break-word;
-  word-break: break-all;
+  inline-size: 250px;
   margin: 0.5rem;
 `;
 
