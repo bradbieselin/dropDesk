@@ -58,7 +58,7 @@ const Ticket = styled.div`
 const DetailsContainer = styled.div`
   align-items: center;
   text-align: center;
-  margin: 50px auto auto auto;
+  margin: 5px auto auto auto;
   width: 300px;
 `;
 
@@ -75,9 +75,20 @@ const MyTickets = ({ user }) => {
         } else {
           setTickets(data.tickets);
         }
-        setSelectedTicket(data.tickets[0]);
       });
   }, []);
+
+  function refreshTickets() {
+    fetch(`/users/${user.id}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.tickets.length > 25) {
+          setTickets(data.tickets.slice(0, 25));
+        } else {
+          setTickets(data.tickets);
+        }
+      });
+  }
 
   function limitChars(string) {
     if (string.length > 18) {
@@ -102,14 +113,29 @@ const MyTickets = ({ user }) => {
           <TicketList>
             {tickets.map((ticket, index) => {
               return (
-                <Ticket key={index} onClick={() => handleClick(ticket)}>
+                <Ticket key={ticket.id} onClick={() => handleClick(ticket)}>
                   {index + 1}: {limitChars(ticket.title)}
                 </Ticket>
               );
             })}
           </TicketList>
           <DetailsContainer>
-            {selectedTicket ? <TicketDetails ticket={selectedTicket} /> : null}
+            {selectedTicket ? (
+              tickets.map((ticket) => {
+                if (ticket.id === selectedTicket.id) {
+                  return (
+                    <TicketDetails
+                      ticket={selectedTicket}
+                      refreshTickets={refreshTickets}
+                      key={ticket.id}
+                      setSelectedTicket={setSelectedTicket}
+                    />
+                  );
+                }
+              })
+            ) : (
+              <div>Select a ticket</div>
+            )}
           </DetailsContainer>
         </TicketContainer>
       </Container>
