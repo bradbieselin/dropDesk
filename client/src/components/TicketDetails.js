@@ -73,12 +73,17 @@ const Category = styled.div`
   margin: 0.5rem;
 `;
 
+const Errors = styled.div`
+  font-size: 1rem;
+`;
+
 const TicketDetails = ({ ticket, refreshTickets, setSelectedTicket }) => {
   const [edit, setEdit] = useState(false);
   const [title, setTitle] = useState(ticket.title);
   const [initialTitle, setInitialTitle] = useState(ticket.title);
   const [description, setDescription] = useState(ticket.description);
   const [descriptionInit, setDescriptionInit] = useState(ticket.description);
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -86,16 +91,20 @@ const TicketDetails = ({ ticket, refreshTickets, setSelectedTicket }) => {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title: title, description: description }),
-    })
-      .then((r) => r.json())
-      .then((d) => {
-        setTitle(d.title);
-        setInitialTitle(d.description);
-        setDescriptionInit(d.description);
-        setSelectedTicket(null);
-        refreshTickets();
-      });
-    setEdit(false);
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((d) => {
+          setTitle(d.title);
+          setInitialTitle(d.description);
+          setDescriptionInit(d.description);
+          setSelectedTicket(null);
+          refreshTickets();
+        });
+        setEdit(false);
+      } else {
+        r.json().then((error) => setErrors(error.errors));
+      }
+    });
   };
 
   const handleReset = (e) => {
@@ -105,6 +114,9 @@ const TicketDetails = ({ ticket, refreshTickets, setSelectedTicket }) => {
 
   const handleCancel = (e) => {
     setEdit(false);
+    setTitle(initialTitle);
+    setDescription(descriptionInit);
+    setErrors([]);
   };
 
   return (
@@ -134,6 +146,9 @@ const TicketDetails = ({ ticket, refreshTickets, setSelectedTicket }) => {
             <input type="submit" value="Submit" />
             <input type="reset" value="Reset" />
             <button onClick={handleCancel}>Cancel</button>
+            <Errors>
+              {errors.length ? errors.map((err) => <p>{err}.</p>) : null}
+            </Errors>
           </form>
         </Container>
       ) : (
