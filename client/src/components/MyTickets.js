@@ -78,11 +78,7 @@ const MyTickets = ({ user }) => {
     fetch(`/users/${user.id}`)
       .then((r) => r.json())
       .then((data) => {
-        if (data.tickets.length > 18) {
-          setTickets(data.tickets.slice(0, 18));
-        } else {
-          setTickets(data.tickets);
-        }
+        setTickets(data.tickets);
       });
   }
 
