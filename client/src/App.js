@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
 import TicketPage from "./components/TicketPage";
 import NavBar from "./components/NavBar";
@@ -53,7 +53,7 @@ function App() {
         <NavBar user={user} setUser={setUser} />
       </Header>
       <Content>
-        <HashRouter>
+        <Switch>
           <Route exact path="/">
             <TicketPage user={user} />
           </Route>
@@ -63,7 +63,7 @@ function App() {
           <Route path="/mytickets">
             <MyTickets user={user} />
           </Route>
-        </HashRouter>
+        </Switch>
       </Content>
     </>
   );
