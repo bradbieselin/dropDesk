@@ -124,6 +124,7 @@ const MyTickets = ({ user }) => {
                     />
                   );
                 }
+                return null;
               })
             ) : (
               <div>Select a ticket</div>
